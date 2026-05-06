@@ -1,41 +1,48 @@
 #include <stdio.h>
 
-int main() {
-    int n;
-    printf("Nhap so luong phan tu n: ");
-    scanf("%d", &n);
-
-    float a[n];
-    float sum_pos = 0, sum_neg = 0;
-    int count_pos = 0, count_neg = 0;
-
-    // Nhap mang
-    for(int i = 0; i < n; i++) {
+// Sửa n thành con trỏ để giá trị thay đổi được cập nhật vào hàm main
+void nhapmang(int a[100], int *n) {
+    printf("Nhap n: ");
+    scanf("%d", n);
+    for (int i = 0; i < *n; i++) {
         printf("a[%d] = ", i);
-        scanf("%f", &a[i]);
+        scanf("%d", &a[i]);
     }
+}
 
-    // Xu ly du lieu
-    for(int i = 0; i < n; i++) {
-        if(a[i] > 0) {
-            sum_pos += a[i];
-            count_pos++;
-        } else if(a[i] < 0) {
-            sum_neg += a[i];
-            count_neg++;
+int main() {
+    int a[100], x = 0, y = 0, n;
+    float tbsd = 0;
+    float tbsa = 0;
+
+    // 1. Phải nhập mảng trước
+    nhapmang(a, &n);
+
+    // 2. Sau đó mới tính toán
+    for (int i = 0; i < n; i++) {
+        if (a[i] > 0) { // Kiểm tra số dương
+            tbsd = tbsd + a[i];
+            x = x + 1;
+        } else if (a[i] < 0) { // Kiểm tra số âm
+            tbsa = tbsa + a[i];
+            y = y + 1;
         }
     }
 
-    // In ket qua
-    if(count_pos > 0)
-        printf("TBC so duong = %.2f\n", sum_pos / count_pos);
-    else
-        printf("Day khong co so duong.\n");
+    printf("\n");
 
-    if(count_neg > 0)
-        printf("TBC so am = %.2f\n", sum_neg / count_neg);
-    else
-        printf("Day khong co so am.\n");
+    // 3. Kiểm tra x và y để tránh lỗi chia cho 0
+    if (x > 0) {
+        printf("Trung binh so duong la: %.2f\n", (tbsd / x));
+    } else {
+        printf("Khong co so duong trong mang\n");
+    }
+
+    if (y > 0) {
+        printf("Trung binh so am la: %.2f\n", (tbsa / y));
+    } else {
+        printf("Khong co so am trong mang\n");
+    }
 
     return 0;
 }
