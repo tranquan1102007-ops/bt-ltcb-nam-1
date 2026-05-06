@@ -1,48 +1,68 @@
 #include <stdio.h>
-int main(){
-float A[100][100];
-int m,n,i,j;
-printf("nhap so hang: ");
-scanf("%d", &m);
-printf("nhap so cot: ");
-scanf("%d", &n);
 
-// 0. Nhập ma trận
-printf("Nhap cac phan tu cua ma tran:\n");
-for(int i = 0; i < m; i++) {
-    for(int j = 0; j < n; j++) {
-        printf("A[%d][%d] = ", i, j);
-        scanf("%f", &A[i][j]);
-    }
-}
-
-// 1. Tìm Max và Min
-float max = A[0][0];
-float min = A[0][0];
-for(int i = 0; i < m; i++) {
-    for(int j = 0; j < n; j++) {
-        // Kiểm tra xem A[i][j] có lớn hơn max không?
-        if(A[i][j] > max) {
-            max = A[i][j];
-        }
-        // Kiểm tra xem A[i][j] có nhỏ hơn min không?
-        if(A[i][j] < min) {
-            min = A[i][j];
+// Thêm đóng ngoặc } cho hàm này
+void nhapmatran(int a[100][100], int dong, int cot) {
+    for (int i = 0; i < dong; i++) {
+        for (int j = 0; j < cot; j++) {
+            printf("Nhap a[%d][%d]: ", i, j);
+            scanf("%d", &a[i][j]);
         }
     }
 }
 
-// 2. In ma trận ra màn hình
-printf("\nMa tran vua nhap la:\n");
-for(int i = 0; i < m; i++) {
-    for(int j = 0; j < n; j++) {
-        printf("%.2f\t", A[i][j]); // In phần tử và một khoảng trắng tab
+void inmatran(int a[100][100], int dong, int cot) {
+    for (int i = 0; i < dong; i++) {
+        for (int j = 0; j < cot; j++) {
+            printf("%4d", a[i][j]); // In các số trên cùng 1 hàng
+        }
+        printf("\n"); // Hết một hàng mới xuống dòng
     }
-    printf("\n"); // Hết một hàng thì xuống dòng
 }
 
-// 3. In kết quả cuối cùng
-printf("Gia tri lon nhat (max) la: %.2f\n", max);
-printf("Gia tri nho nhat (min) la: %.2f\n", min);
-return 0;
+int maxmatran(int a[100][100], int dong, int cot) {
+    int max = a[0][0];
+    for (int i = 0; i < dong; i++) {
+        for (int j = 0; j < cot; j++) {
+            if (a[i][j] > max) {
+                max = a[i][j];
+            }
+        }
+    }
+    return max;
+}
+
+int minmatran(int a[100][100], int dong, int cot) {
+    int min = a[0][0];
+    for (int i = 0; i < dong; i++) {
+        for (int j = 0; j < cot; j++) {
+            if (a[i][j] < min) {
+                min = a[i][j];
+            }
+        }
+    }
+    return min;
+}
+
+int main() {
+    int a[100][100]; // Khai báo mảng a ở đây
+    int dong, cot;
+
+    printf("Nhap so hang: ");
+    scanf("%d", &dong);
+    printf("Nhap so cot: ");
+    scanf("%d", &cot);
+
+    nhapmatran(a, dong, cot);
+
+    printf("\nMa tran vua nhap la:\n");
+    inmatran(a, dong, cot);
+
+    // Gọi hàm để gán giá trị vào biến max, min
+    int max = maxmatran(a, dong, cot);
+    int min = minmatran(a, dong, cot);
+
+    printf("\nMax la: %d", max);
+    printf("\nMin la: %d", min);
+
+    return 0;
 }
