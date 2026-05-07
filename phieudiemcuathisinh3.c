@@ -62,7 +62,20 @@ int main() {
                 ds[i].soBaoDanh,
                 ds[i].diem.toan, ds[i].diem.ly, ds[i].diem.hoa);
     }
+
     printf("\n==========================================\n");
+    printf("danh sach thi sinh co diem tren 15 la:\n");
+    for(int i=0;i<n;i++){
+        int tongdiem=ds[i].diem.toan+ds[i].diem.ly+ds[i].diem.hoa;
+        if(tongdiem>15){
+             printf("\nThi sinh %d: %s %s %s | SBD: %s | Diem: %.1f, %.1f, %.1f",
+                i + 1,
+                ds[i].hoTen.ho, ds[i].hoTen.tenDem, ds[i].hoTen.ten,
+                ds[i].soBaoDanh,
+                ds[i].diem.toan, ds[i].diem.ly, ds[i].diem.hoa);
+        }
+        }
+    }
 
     return 0;
 }

@@ -62,7 +62,44 @@ int main() {
                 ds[i].soBaoDanh,
                 ds[i].diem.toan, ds[i].diem.ly, ds[i].diem.hoa);
     }
-    printf("\n==========================================\n");
+    // XỬ LÝ: SẮP XẾP THÍ SINH THEO TỔNG ĐIỂM GIẢM DẦN
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = i + 1; j < n; j++) {
+            float tongI = ds[i].diem.toan + ds[i].diem.ly + ds[i].diem.hoa;
+            float tongJ = ds[j].diem.toan + ds[j].diem.ly + ds[j].diem.hoa;
 
-    return 0;
-}
+            if (tongI < tongJ) {
+                // Hoán vị cả 2 struct cho nhau
+                struct ThiSinh temp = ds[i];
+                ds[i] = ds[j];
+                ds[j] = temp;
+            }
+        }
+    }
+
+    // XUẤT DANH SÁCH SAU KHI SẮP XẾP
+    printf("\n==========================================");
+    printf("\nDANH SACH THI SINH SAU KHI SAP XEP (DIEM GIAM DAN)");
+    for (int i = 0; i < n; i++) {
+        float tong = ds[i].diem.toan + ds[i].diem.ly + ds[i].diem.hoa;
+        printf("\n%d. %s %s | Tong diem: %.2f",
+                i + 1, ds[i].hoTen.tenDem, ds[i].hoTen.ten, tong);
+    }
+    printf("\n==========================================\n");
+    printf("\n==========================================\n");
+    printf("danh sach thi sinh co diem tren 15 la:\n");
+    for(int i=0;i<n;i++){
+        int tongdiem=ds[i].diem.toan+ds[i].diem.ly+ds[i].diem.hoa;
+        if(tongdiem>15){
+             printf("\nThi sinh %d: %s %s %s | SBD: %s | Diem: %.1f, %.1f, %.1f",
+                i + 1,
+                ds[i].hoTen.ho, ds[i].hoTen.tenDem, ds[i].hoTen.ten,
+                ds[i].soBaoDanh,
+                ds[i].diem.toan, ds[i].diem.ly, ds[i].diem.hoa);
+        }
+        }
+        return 0;
+    }
+
+
+
