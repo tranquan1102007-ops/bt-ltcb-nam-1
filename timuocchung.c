@@ -1,6 +1,6 @@
 #include <stdio.h>
 int main(){
-    int a,b,min;
+int a,b,min;
 printf("nhap 2 so ");
 scanf("%d %d", &a ,&b);
 if(a<b){
