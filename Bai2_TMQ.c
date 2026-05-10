@@ -1,34 +1,28 @@
 #include <stdio.h>
-int main(){
-int n,a;
-printf("nhap so n: ");
-scanf("%d" ,&n);
-for(int i=1;i=n;i++){
-if (n<i*10){
-a=(i-1)+(n-((i-1)*10));
-}
-else if(n>=i*10){
-    a=i+(n-(i*10));
-}
-if(a>=10){
-    if((a*a-a)%10==0){
-        printf("dung");
-    }
-    else {
-        printf("sai");
-    }
-}
-else {
-    if(a==5||a==1){
-        printf("dung");
-    }
-    else {
-        printf("sai");
-    }
-}
 
-return 0;
-}
+int main() {
+    int n, temp;
+    int sum = 0;
 
+    printf("nhap so n: ");
+    if (scanf("%d", &n) != 1) return 1;
 
+    // Bước 1: Tính tổng các chữ số của n
+    temp = n;
+    while (temp > 0) {
+        sum += temp % 10; // Lấy chữ số cuối cộng vào sum
+        temp /= 10;       // Loại bỏ chữ số cuối đã lấy
+    }
+
+    // Bước 2: Kiểm tra logic (sum*sum có cùng chữ số cuối với sum hay không)
+    // Điều này tương đương với việc (sum*sum - sum) chia hết cho 10
+    if ((sum * sum - sum) % 10 == 0) {
+        printf("Dung\n");
+        printf("Giai thich: Tong chu so la %d, %d^2 = %d (cung duoi %d)\n", sum, sum, sum*sum, sum % 10);
+    } else {
+        printf("Sai\n");
+        printf("Giai thich: Tong chu so la %d, %d^2 = %d (khac duoi %d)\n", sum, sum, sum*sum, sum % 10);
+    }
+
+    return 0;
 }
